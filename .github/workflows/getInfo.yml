@@ -3,42 +3,23 @@ name: Generate Info
 on: push
 
 jobs:
-
-  # job 1 - getInfo
-  getInfoFile:
+  get-info-file:
     runs-on: ubuntu-latest
-
     steps:
     - name: Get Info File
+      uses: actions/checkout@v2
 
-      - name: Get Info
-        uses: actions/checkout@v2
+    - name: setup python
+      run: |
+        sudo apt update
+        sudo apt install -y python3
       
-      - name: setup python
-        run: |
-          sudo apt update
-          sudo apt install -y python3
-      
-      - name: run python
-        run: |
-          sudo python3 main.py > one.txt
-
-      - name: Upload Info File
-        uses: actions/upload-artifact@v2
-        with:
-          name: user-info.json
-          path: ./Ayon_ssp.json
+    - name: run python
+      run: |
+        sudo python3 main.py > one.txt
     
-    # - name: run python 2
-    #   run: |
-    #     sudo python3 main2.py > two.txt
-    
-    # - name: run python 3
-    #   run: |
-    #     sudo python3 main3.py > final.txt
-    
-    # - name: upload final
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: final
-    #     path: final.txt
+    - name: Upload Info File
+      uses: actions/upload-artifact@v2
+      with:
+        name: user-info.json
+        path: ./Ayon_ssp.json
