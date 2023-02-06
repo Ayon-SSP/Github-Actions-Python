@@ -23,3 +23,24 @@ jobs:
       with:
         name: user-info.json
         path: ./Ayon_ssp.json
+
+  get-html-file:
+    runs-on: ubuntu-latest
+    steps:
+    - name: generate info file
+      uses: actions/checkout@v2
+
+    - name: setup python
+      run: |
+        sudo apt update
+        sudo apt install -y python3
+      
+    - name: run python
+      run: |
+        sudo python3 readJsonFile.py
+    
+    - name: Upload Info File html
+      uses: actions/upload-artifact@v2
+      with:
+        name: user-info.json
+        path: ./AyonProfile.html
